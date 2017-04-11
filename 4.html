@@ -8,72 +8,155 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
   <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    }
+    
+    #app {
+      width: 60vw;
+    }
+    
+    .header {
+      background-color: cornflowerblue;
+      height: 4em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .title {
+      line-height: 2em;
+      font-size: 1.5em;
+      color: white;
+    }
+    
+    .searchInput {
+      height: 2em;
+      display: none;
+    }
+    
+    .searchIcon,
+    .menuBar {
+      padding: .5em;
+      color: white;
+    }
+    
+    .item {
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .item>.text {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 2em;
+    }
+    
+    .content {
+      border: 1px lightgray solid;
+    }
+    
+    .avatar {
+      flex-grow: 0;
+    }
+    
+    .commentCount {
+      flex-grow: 0;
+    }
+    
+    .time {
+      color: gray;
+      font-size: .7em;
+    }
+    
+    .item>p {
+      display: inline-block;
+    }
+    
+    .avatar>img {
+      border-radius: 50%;
+    }
+  </style>
 </head>
 
 <body>
   <div id="app"></div>
   <script type="text/babel">
-    class Header extends React.Component {
-      render() {
-        return (
-          <div className="header">
-            <div className="fa fa-more"></div>
+    class Header extends React.Component { render() { return (
+    <div className="header">
+      <div className="fa fa-bars fa-2x menuBar"></div>
 
-            <span className="title">Timeline</span>
+      <span className="title">Timeline</span>
 
-            <input
-              type="text"
-              className="searchInput"
-              placeholder="Search ..." />
+      <input type="text" className="searchInput" placeholder="Search ..." />
 
-            <div className="fa fa-search searchIcon"></div>
-          </div>
-        )
-      }
-    }
+      <div className="fa fa-search fa-2x searchIcon"></div>
 
-    class Content extends React.Component {
-      render() {
-        return (
-          <div className="content">
-            <div className="line"></div>
+    </div>
+    ) } } class Content extends React.Component { render() { return (
+    <div className="content">
+      <div className="line"></div>
 
-            {/* Timeline item */}
-            <div className="item">
-              <div className="avatar">
-                <img src="http://www.croop.cl/UI/twitter/images/doug.jpg" />
-                Doug
-              </div>
+      {/* Timeline item */}
+      <div className="item">
+        <div className="avatar">
+          <img src="http://www.croop.cl/UI/twitter/images/doug.jpg" />
+        </div>
+        <div className="text">
+          <span className="time">Just now</span>
+          <p>Ate lunch yo!</p>
+        </div>
+        <div className="commentCount">
+          2&nbsp;<i className="fa fa-lrg fa-comments" aria-hidden="true"></i>
+        </div>
+      </div>
 
-              <span className="time">
-                An hour ago
-              </span>
-              <p>Ate lunch</p>
-              <div className="commentCount">
-                2
-              </div>
-            </div>
+      {/* Timeline item */}
+      <div className="item">
+        <div className="avatar">
+          <img src="http://www.croop.cl/UI/twitter/images/doug.jpg" />
+        </div>
+        <div className="text">
+          <span className="time">An hour ago</span>
+          <p>Ate breakfast yo!</p>
+        </div>
+        <div className="commentCount">
+          20&nbsp;<i className="fa fa-lrg fa-comments" aria-hidden="true"></i>
+        </div>
+      </div>
 
-            {/* ... */}
+      {/* Timeline item */}
+      <div className="item">
+        <div className="avatar">
+          <img src="http://www.croop.cl/UI/twitter/images/doug.jpg" />
+        </div>
+        <div className="text">
+          <span className="time">Two weeks ago</span>
+          <p>I love food!!!</p>
+        </div>
+        <div className="commentCount">
+          5&nbsp;<i className="fa fa-lrg fa-comments" aria-hidden="true"></i>
+        </div>
+      </div>
 
-          </div>
-        )
-      }
-    }
-
-    class App extends React.Component {
-      render() {
-        return (
-          <div className="notificationsFrame">
-            <div className="panel">
-              <Header />
-              <Content />
-            </div>
-          </div>
-        )
-      }
-    }
-    var mount = document.querySelector('#app'); ReactDOM.render(
+    </div>
+    ) } } class App extends React.Component { render() { return (
+    <div className="notificationsFrame">
+      <div className="panel">
+        <Header />
+        <Content />
+      </div>
+    </div>
+    ) } } var mount = document.querySelector('#app'); ReactDOM.render(
     <App />, mount);
   </script>
 </body>
