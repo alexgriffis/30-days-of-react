@@ -1,4 +1,5 @@
-const posts =
+/* global React, ReactDOM */
+const activities =
   [
     {
       timestamp: new Date().getTime(),
@@ -45,38 +46,47 @@ const posts =
 class Clock extends React.Component {
   constructor (props) {
     super(props)
+
+    this.state = this.getTime()
+  }
+  componentDidMount () {
+    this.setTimer()
+  }
+  componentWillUnmount () {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+  }
+
+  getTime () {
     let now = new Date()
-    this.state = {
+    let theTime = {
       hours: now.getHours(),
       minutes: now.getMinutes(),
       seconds: now.getSeconds()
     }
 
-    if (this.state.hours === 24 || this.state.hours < 12) this.state.ampm = 'am'
-    else this.state.ampm = 'pm'
-    console.log(this.state)
+    if (theTime.hours === 24 || theTime.hours < 12) theTime.ampm = 'am'
+    else theTime.ampm = 'pm'
+
+    return theTime
   }
   setTimer () {
     clearTimeout(this.timeout)
-    this.timeout = setTimeout(() => {
-      this.updateClock
-    }, 1000)
+    this.timeout = setTimeout(this.updateClock.bind(this), 1000)
   }
   updateClock () {
-    const currentTime = new Date()
-    this.setState({
-      currentTime: currentTime
-    }, this.setTimer)
+    this.setState(this.getTime, this.setTimer)
   }
   render () {
     const { hours, minutes, seconds, ampm } = this.state
     return (
       <div className='clock'>
         {
-          hours === 0 ?
-            12
-            : (hours > 12) ?
-              hours - 12
+          hours === 0
+            ? 12
+            : (hours > 12)
+              ? hours - 12
               : hours
         }:{
           minutes > 9 ? minutes : `0${minutes}`
@@ -87,15 +97,80 @@ class Clock extends React.Component {
     )
   }
 }
+class Container extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      refreshing: false
+    }
+  }
+  onComponentRefresh () {
+    this.setState({ refreshing: false })
+  }
+  refresh () {
+    this.setState({ refreshing: true })
+  }
+  render () {
+    const { refreshing } = this.state
+    return (
+      <div className='panel'>
+        <Header title='Heady' />
+        <Content
+          onComponentRefresh={(e) => this.onComponentRefresh(e)}
+          requestRefresh={refreshing}
+          /* fetchData={fetchEvents} */ />
+        <Footer>
+          <button onClick={(e) => this.refresh(e)}>
+            <i className='fa fa-refresh' />
+            Refresh
+            </button>
+        </Footer>
+      </div>
+    )
+  }
+}
+class Footer extends React.Component {
+  render () {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    )
+  }
+}
 
 class Content extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      loading: false,
+      activities: []
+    }
+  }
+  componentDidMount () {
+    this.updateData()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.requestRefresh !== this.props.requestRefresh) {
+      this.setState({ loading: true }, this.updateData)
+    }
+  }
+  updateData () {
+    this.setState({
+      loading: false,
+      activities
+    }, this.props.onComponentRefresh)
+  }
   render () {
+    const { loading, activities } = this.state
     return (
       <div className='content'>
         <div className='line' />
-        {posts.map((post) => {
+        {loading && <div>Loading</div>}
+        {activities.map((activity) => {
           return (
-            <ActivityItem activity={post} />
+            <ActivityItem activity={activity} />
           )
         })}
       </div>
@@ -158,10 +233,7 @@ class App extends React.Component {
   render () {
     return (
       <div className='notificationsFrame'>
-        <div className='panel'>
-          <Header title='Heady' />
-          <Content />
-        </div>
+        <Container />
       </div>
     )
   }
