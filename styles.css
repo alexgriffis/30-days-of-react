@@ -1,0 +1,102 @@
+body {
+  display: flex;
+  justify-content: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+#app {
+  width: 60vw;
+}
+.active {
+  width: 10em;
+  opacity: 1;
+  visibility: visible;
+}
+.avatar {
+  flex-grow: 0;
+}
+.avatar>img {
+  border-radius: 50%;
+}
+.clock {
+  font-size: 16px;
+  display: block;
+  left: 4em;
+  position: absolute;
+  color: #333333;
+}
+.commentCount {
+  flex-grow: 0;
+}
+.content {
+  border: 1px lightgray solid;
+}
+.footer {
+  background-color: gray;
+}
+.header {
+  background-color: rgba(251, 202, 43, 1);
+  height: 4em;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+.item {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item>.text {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 2em;
+}
+.item>p {
+  display: inline-block;
+}
+.refresher {
+  width: 100%;
+  height: 2em;
+  background-color: gray;
+  border: none;
+  cursor: pointer;
+}
+.refresher:hover {
+  background-color: darkgray;
+}
+.refresher:active {
+  background-color: whitesmoke;
+}
+.searchIcon,
+.menuBar {
+  padding: .5em;
+  color: #333333;
+
+}
+.searchInput {
+  font-size: 16px;
+  height: 2em;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  right: 4em;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 1em;
+  width: 0em;
+  transition: width 0.5s,opacity 0.5s, visibility 0.5s ease-in;
+}
+.time {
+  color: gray;
+  font-size: .7em;
+}
+.title {
+  line-height: 2em;
+  font-size: 1.5em;
+  color: #333333;
+}

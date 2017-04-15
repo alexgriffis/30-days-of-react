@@ -177,6 +177,10 @@ class Content extends React.Component {
     )
   }
 }
+Content.propTypes = {
+  requestRefresh: React.PropTypes.bool.isRequired,
+  onComponentRefresh: React.PropTypes.func.isRequired
+}
 
 class ActivityItem extends React.Component {
   render () {
@@ -196,6 +200,9 @@ class ActivityItem extends React.Component {
       </div>
     )
   }
+}
+ActivityItem.propTypes = {
+  activity: React.PropTypes.object.isRequired
 }
 
 class Header extends React.Component {
@@ -228,7 +235,6 @@ class Header extends React.Component {
     )
   }
 }
-
 Header.defaultProps = {
   title: 'Github activity'
 }
