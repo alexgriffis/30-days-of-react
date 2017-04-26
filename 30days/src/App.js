@@ -1,53 +1,61 @@
 import React, { Component } from 'react';
+import 'whatwg-fetch'
+import TimeForm from './TimeForm'
 import './App.css';
 
-const a = [1, 10, 100, 1000]
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentTime: null,
+      msg: 'now',
+      tz: 'PST'
+    }
+  }
 
-const App = (props) => {
-  return (
-    <ul>
-      {React.Children.map(a, i => <li>{i}</li>)}
-    </ul>
-  )
+  fetchCurrentTime() {
+    fetch(this.getApiURL())
+      .then(resp => resp.json())
+      .then(resp => {
+        const currentTime = resp.dateString
+        this.setState({ currentTime })
+      })
+  }
+
+  getApiURL() {
+    const { tz, msg } = this.state
+    const host = 'https://fullstacktime.herokuapp.com'
+    return `${host}/${tz}/${msg}.json`
+  }
+
+  handleFormSubmit(e) {
+    this.fetchCurrentTime()
+  }
+  handleChange(newState) {
+    this.setState(newState)
+  }
+  render() {
+    const { currentTime, tz, msg } = this.state
+    const apiUrl = this.getApiURL()
+    return (
+      <div>
+        {!currentTime &&
+          <button onClick={this.fetchCurrentTime.bind(this)}>
+            Get Current Time
+          </button>
+        }
+        {currentTime && <div> The current time is: {currentTime}</div>}
+        <TimeForm
+          onFormChange={this.handleChange.bind(this)}
+          onSubmit={this.handleFormSubmit.bind(this)}
+          tz={tz}
+          msg={msg}
+        />
+        <p>We'll be making a request from <code>{apiUrl}</code></p>
+      </div>
+    )
+  }
+
 }
 
-const Formatter = ({ format, state }) => {
-  let children = format.split('').map((e) => {
-    if (e === 'h') {
-      return <Hour />
-    }
-    else if (e === 'm') {
-      return <Minute />
-    }
-    else if (e === 's') {
-      return <Second />
-    }
-    else if (e === 'p') {
-      return <Ampm />
-    }
-    else if (e === ' ') {
-      return <span> </span>
-    }
-    else {
-      return <Separator separator={e} />
-    }
-  })
-  return (
-    <span>
-      {React.Children.map(children, c => React.cloneElement(c, state))}
-    </span>
-  )
-}
-const Hour = ({ hours }) => {
-  hours = hours === 0
-    ? 12
-    : (hours > 12)
-      ? hours - 12
-      : hours
-  return (<span>{hours}</span>)
-}
-const Separator = ({ separator }) => (<span>{separator || ':'}</span>)
-const Ampm = ({ hours }) => (<span>{hours >= 12 ? 'pm' : 'am'}</span>)
-const Second = ({ seconds }) => (<span>{seconds > 9 ? seconds : `0${seconds}`}</span>)
-const Minute = ({ minutes }) => (<span>{minutes > 9 ? minutes : `0${minutes}`}</span>)
 export default App;
