@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+/* global fetch */
+import React, { Component } from 'react'
+import { HashRouter, Route } from 'react-router-dom'
 import 'whatwg-fetch'
-import TimeForm from './TimeForm'
-import './App.css';
+import TimeForm from './components/TimeForm'
+import Index from './containers/Index'
+import Home from './views/Home'
+import About from './views/About'
+import './App.css'
 
-class App extends Component {
-  constructor(props) {
+class TimePage extends Component {
+  constructor (props) {
     super(props)
     this.state = {
       currentTime: null,
@@ -13,7 +18,7 @@ class App extends Component {
     }
   }
 
-  fetchCurrentTime() {
+  fetchCurrentTime () {
     fetch(this.getApiURL())
       .then(resp => resp.json())
       .then(resp => {
@@ -22,19 +27,20 @@ class App extends Component {
       })
   }
 
-  getApiURL() {
+  getApiURL () {
     const { tz, msg } = this.state
     const host = 'https://fullstacktime.herokuapp.com'
     return `${host}/${tz}/${msg}.json`
   }
 
-  handleFormSubmit(e) {
+  handleFormSubmit (e) {
     this.fetchCurrentTime()
   }
-  handleChange(newState) {
+
+  handleChange (newState) {
     this.setState(newState)
   }
-  render() {
+  render () {
     const { currentTime, tz, msg } = this.state
     const apiUrl = this.getApiURL()
     return (
@@ -55,7 +61,20 @@ class App extends Component {
       </div>
     )
   }
-
 }
-
-export default App;
+class App extends Component {
+  render () {
+    return (
+      <HashRouter>
+        <div>
+          <Index>
+            <Route path='/home' component={Home} />
+            <Route path='/about' component={About} />
+            <Route path='/time' component={TimePage} />
+          </Index>
+        </div>
+      </HashRouter>
+    )
+  }
+}
+export default App
