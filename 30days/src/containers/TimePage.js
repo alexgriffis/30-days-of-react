@@ -1,12 +1,5 @@
-/* global fetch */
 import React, { Component } from 'react'
-import { HashRouter, Route } from 'react-router-dom'
-import 'whatwg-fetch'
-import TimeForm from './components/TimeForm'
-import Index from './containers/Index'
-import Home from './views/Home'
-import About from './views/About'
-import './App.css'
+import TimeForm from '../components/TimeForm'
 
 class TimePage extends Component {
   constructor (props) {
@@ -62,19 +55,5 @@ class TimePage extends Component {
     )
   }
 }
-class App extends Component {
-  render () {
-    return (
-      <HashRouter>
-        <div>
-          <Index>
-            <Route path='/home' component={Home} />
-            <Route path='/about' component={About} />
-            <Route path='/time' component={TimePage} />
-          </Index>
-        </div>
-      </HashRouter>
-    )
-  }
-}
-export default App
+
+export default TimePage
