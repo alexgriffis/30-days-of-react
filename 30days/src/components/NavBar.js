@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const NavBar = () => {
+const NavBar = ({ currentUser }) => {
   return (
-    <div>
+    <div className='navbar'>
       <NavLink
         className='link'
         to='/home'
@@ -11,11 +11,24 @@ const NavBar = () => {
         Home
       </NavLink>
       <NavLink
-        className='link'
         to='/about'
+        className='link'
         activeClassName='active'>
         About
       </NavLink>
+      {currentUser.loggedIn
+        ? <NavLink
+          to='/logout'
+          className='link'
+          activeClassName='active'>
+          Logout
+          </NavLink>
+        : <NavLink
+          to='/login'
+          className='link'
+          activeClassName='active'>Login
+          </NavLink>
+      }
     </div>
   )
 }

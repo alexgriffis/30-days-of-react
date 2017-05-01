@@ -7,22 +7,31 @@ import Home from '../views/Home'
 import About from '../views/About'
 import './App.css'
 
+const renderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest)
+  return (
+    React.createElement(component, finalProps)
+  )
+}
+
+const PropsRoute = ({ component, ...rest }) => {
+  return (
+    <Route {...rest} render={routeProps => {
+      return renderMergedProps(component, routeProps, rest)
+    }} />
+  )
+}
+
 class App extends Component {
   render () {
-    const createElement = (Component, props) => {
-      return <Component
-        actions={this.props.actions}
-        {...props} />
-    }
     return (
-      <HashRouter
-        createElement={createElement}>
-        <div>
-          <Index>
-            <Route path='/home' component={Home} />
-            <Route path='/about' component={About} />
-            <Route path='/time' component={TimePage} />
-          </Index>
+      <HashRouter>
+
+        <div className='page'>
+          <Index />
+          <PropsRoute path='/home' component={Home} actions={this.props.actions} />
+          <PropsRoute path='/about' component={About} actions={this.props.actions} />
+          <PropsRoute path='/time' component={TimePage} actions={this.props.actions} />
         </div>
       </HashRouter>
     )

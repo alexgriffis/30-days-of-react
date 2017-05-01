@@ -4,7 +4,6 @@ import App from './App'
 
 const Root = ({ store, actions }) => {
   return (
-
     <Provider store={store}>
       <App actions={actions} />
     </Provider>
