@@ -9,12 +9,23 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_NEW_TIME:
-      return { ...state, currentTime: new Date() }
+      return {
+        ...state,
+        currentTime: action.payload.dateString
+      }
     default:
       return state
   }
 }
 
+const host = 'https://fullstacktime.herokuapp.com'
 export const actions = {
-  updateTime: () => ({ type: types.FETCH_NEW_TIME })
+  updateTime: ({ timezone = 'pst', str = 'now' }) => ({
+    type: types.FETCH_NEW_TIME,
+    meta: {
+      type: 'api',
+      url: `${host}/${timezone}/${str}.json`,
+      method: 'GET'
+    }
+  })
 }

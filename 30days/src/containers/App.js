@@ -26,7 +26,6 @@ class App extends Component {
   render () {
     return (
       <HashRouter>
-
         <div className='page'>
           <Index />
           <PropsRoute path='/home' component={Home} actions={this.props.actions} />
