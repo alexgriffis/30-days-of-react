@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NavBar from '../components/NavBar'
+import Navbar from '../components/Navbar/Navbar'
 import { connect } from 'react-redux'
 
 class Index extends Component {
@@ -7,7 +7,7 @@ class Index extends Component {
     const { currentUser } = this.props
     return (
       <div className='app'>
-        <NavBar currentUser={currentUser} />
+        <Navbar currentUser={currentUser} />
       </div>
     )
   }
