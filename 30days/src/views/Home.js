@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 const Home = ({ actions, currentTime }) => {
   return (
     <div className='content'>
-      <h1>Hiiii Guysss</h1>
+      <h1>Hiiii Guysss from {process.env.APP_NAME}</h1>
       <p>The time is {currentTime.currentTime.toString()}</p>
       <button onClick={actions.currentTime.updateTime}>Update</button>
     </div>

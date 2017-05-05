@@ -30,6 +30,11 @@ const apiMiddleware = (store) => (next) => (action) => {
       store.dispatch(newAction)
     })
 }
+
+const middleWare = [apiMiddleware]
+if (process.env.NODE_ENV === 'development') {
+  middleWare.unshift(loggingMiddleware)
+}
 const configureStore = () => {
   const reducer = combineReducers({
     currentTime: currentTime.reducer,
@@ -38,7 +43,7 @@ const configureStore = () => {
 
   const store = createStore(
     reducer,
-    applyMiddleware(apiMiddleware, loggingMiddleware)
+    applyMiddleware(...middleWare)
   )
 
   const actions = {

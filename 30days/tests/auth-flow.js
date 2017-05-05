@@ -19,7 +19,7 @@ module.exports = {
   'logging out': (browser) => {
     browser
       .click('a[href="#/logout"]')
-      .waitForElementVisible('button', 1000)
+      .waitForElementVisible('.content button', 1000)
       .click('button')
       .waitForElementVisible('h1', 1000)
       .getText('h1', function (res) {

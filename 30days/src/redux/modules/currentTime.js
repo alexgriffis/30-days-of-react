@@ -18,7 +18,7 @@ export const reducer = (state = initialState, action) => {
   }
 }
 
-const host = 'https://fullstacktime.herokuapp.com'
+const host = process.env.TIME_SERVER
 export const actions = {
   updateTime: ({ timezone = 'pst', str = 'now' }) => {
     return {
