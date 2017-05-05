@@ -18,7 +18,7 @@ export const reducer = (state = initialState, action) => {
   }
 }
 
-const host = process.env.TIME_SERVER
+const host = process.env.REACT_APP_TIME_SERVER
 export const actions = {
   updateTime: ({ timezone = 'pst', str = 'now' }) => {
     return {
