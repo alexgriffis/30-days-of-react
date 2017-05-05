@@ -4,7 +4,7 @@ export const types = {
 }
 
 const initialState = {
-  user: {},
+  user: { email: 'no user' },
   loggedIn: false
 }
 
@@ -24,6 +24,8 @@ export const reducer = (state = initialState, action) => {
 }
 
 export const actions = {
-  login: (user) => ({ type: types.LOGIN, payload: user }),
+  login: (user) => {
+    return ({ type: types.LOGIN, payload: user })
+  },
   logout: () => ({ type: types.LOGOUT })
 }

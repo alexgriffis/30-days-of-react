@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TimeForm from '../components/TimeForm'
-
+import Clock from '../components/Clock'
 class TimePage extends Component {
   constructor (props) {
     super(props)
@@ -43,7 +43,7 @@ class TimePage extends Component {
             Get Current Time
           </button>
         }
-        {currentTime && <div> The current time is: {currentTime}</div>}
+        {currentTime && <div> The current time is: {/*<Clock currentTime={currentTime} /> */}{currentTime}</div>}
         <TimeForm
           onFormChange={this.handleChange.bind(this)}
           onSubmit={this.handleFormSubmit.bind(this)}

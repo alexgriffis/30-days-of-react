@@ -20,12 +20,14 @@ export const reducer = (state = initialState, action) => {
 
 const host = 'https://fullstacktime.herokuapp.com'
 export const actions = {
-  updateTime: ({ timezone = 'pst', str = 'now' }) => ({
-    type: types.FETCH_NEW_TIME,
-    meta: {
-      type: 'api',
-      url: `${host}/${timezone}/${str}.json`,
-      method: 'GET'
+  updateTime: ({ timezone = 'pst', str = 'now' }) => {
+    return {
+      type: types.FETCH_NEW_TIME,
+      meta: {
+        type: 'api',
+        url: `${host}/${timezone}/${str}.json`,
+        method: 'GET'
+      }
     }
-  })
+  }
 }

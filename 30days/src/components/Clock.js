@@ -4,20 +4,15 @@ const Formatter = ({ format, state }) => {
   let children = format.split('').map((e) => {
     if (e === 'h') {
       return <Hour />
-    }
-    else if (e === 'm') {
+    } else if (e === 'm') {
       return <Minute />
-    }
-    else if (e === 's') {
+    } else if (e === 's') {
       return <Second />
-    }
-    else if (e === 'p') {
+    } else if (e === 'p') {
       return <Ampm />
-    }
-    else if (e === ' ') {
-      return <span> </span>
-    }
-    else {
+    } else if (e === ' ') {
+      return <span />
+    } else {
       return <Separator separator={e} />
     }
   })
@@ -41,20 +36,21 @@ const Second = ({ seconds }) => (<span>{seconds > 9 ? seconds : `0${seconds}`}</
 const Minute = ({ minutes }) => (<span>{minutes > 9 ? minutes : `0${minutes}`}</span>)
 
 class Clock extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = this.getTime()
   }
-  componentDidMount() {
+  componentDidMount () {
     this.setTimer()
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
     if (this.timeout) {
       clearTimeout(this.timeout)
     }
   }
-  getTime() {
-    let now = new Date()
+  getTime () {
+    // let now = this.props.currentTime
+    let now = new Date.now()
     let theTime = {
       hours: now.getHours(),
       minutes: now.getMinutes(),
@@ -62,16 +58,16 @@ class Clock extends Component {
     }
     return theTime
   }
-  setTimer() {
+  setTimer () {
     clearTimeout(this.timeout)
     this.timeout = setTimeout(this.updateClock.bind(this), 1000)
   }
-  updateClock() {
+  updateClock () {
     this.setState(this.getTime, this.setTimer)
   }
-  render() {
+  render () {
     return (
-      <div className="clock">
+      <div className='clock'>
         <Formatter {...this.state} format='h.m.s p' />
       </div>
     )
