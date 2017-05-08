@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "7.4"
+  - "7.5"
 deploy:
   provider: script
   script: 30days/scripts/deploy.sh
