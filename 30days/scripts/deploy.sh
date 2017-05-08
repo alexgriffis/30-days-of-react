@@ -1,2 +1,2 @@
 #!/bin/bash
-surge -p build --domain poor-trail.surge.sh
+surge -p 30days/build --domain poor-trail.surge.sh
