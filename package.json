@@ -1,7 +1,7 @@
 {
   "name": "30days",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "./30days",
   "private": true,
   "dependencies": {
     "react": "^15.5.4",
@@ -85,9 +85,9 @@
     }
   },
   "scripts": {
-    "start": "node 30days/scripts/start.js",
-    "build": "node 30days/scripts/build.js",
-    "release": "node ./30days/scripts/release.js",
+    "start": "node /scripts/start.js",
+    "build": "node /scripts/build.js",
+    "release": "node ./scripts/release.js",
     "test": "jest"
   },
   "babel": {
