@@ -61,6 +61,7 @@
     "whatwg-fetch": "2.0.2"
   },
   "jest": {
+    "rootDir": "./30days",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
     ],
