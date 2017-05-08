@@ -1,0 +1,23 @@
+.link {
+  height: 4em;
+  width: 8em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link:hover {
+  background: white;
+}
+.active {
+  color: red;
+}
+.navbar {
+  height: 4em;
+  align-items: center;
+  background: lightgray;
+  display: flex;
+}
+.content{
+  margin: 2em;
+}

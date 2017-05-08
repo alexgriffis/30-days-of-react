@@ -7,7 +7,7 @@ import Home from '../views/Home'
 import About from '../views/About'
 import Login from '../views/Login'
 import Logout from '../views/Logout'
-import './App.css'
+import '../App.css'
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest)
